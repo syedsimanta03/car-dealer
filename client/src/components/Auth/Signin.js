@@ -6,8 +6,8 @@ import { withRouter } from 'react-router-dom';
 import { Form, Icon, notification, Input, Checkbox, Row, Col } from 'antd';
 
 const initState = {
-  username: '',
-  password: ''
+  username: 'sam',
+  password: '1234test'
 };
 
 class Signin extends Component {
@@ -16,7 +16,7 @@ class Signin extends Component {
     this.clearState();
     notification.open({
       message: 'Loggedin Successfully',
-      description: 'Buy your next car!',
+      description: 'Add your awesome car!',
       icon: <Icon type='check-circle' theme='twoTone' twoToneColor='#52c41a' />
     });
   };

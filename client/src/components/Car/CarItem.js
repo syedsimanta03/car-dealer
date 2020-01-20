@@ -21,6 +21,7 @@ const CarItem = ({ _id, imageUrl, name, description, category, likes, rating, pr
         </div>
         <a className='btn-floating btn-action ml-auto mr-4'>
           <Badge
+            showZero
             text='Likes'
             count={likes}
             style={{ backgroundColor: '#52c41a' }}

@@ -33,7 +33,7 @@ class Search extends Component {
                       <input
                         type='search'
                         name='search'
-                        placeholder='Search your car...'
+                        placeholder='Search your car ex: audi'
                         aria-label='Search'
                         className='form-control'
                         onChange={async event => {

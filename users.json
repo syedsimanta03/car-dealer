@@ -1,0 +1,1 @@
+mongoimport -h ds211269.mlab.com:11269 -d heroku_81nf6h7p -c users -u <user> -p <password> --file users.csv --type csv --headerline

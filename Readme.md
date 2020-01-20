@@ -7,29 +7,9 @@
 <a  href="https://automotive-app.herokuapp.com/">Visit Website</a>
 </p
 
-> **Note:** The **AutoCar** is kind of Automotive Car Buy Sell e-Commerce Business App Solution
+> **       Note:** The **AutoCar** is kind of Automotive Car Buy Sell e-Commerce Business App Solution
 
-## 
-
-<div align="center">
-    <p align="center">
-<img  src="https://img.icons8.com/office/30/000000/react.png">
-    </p>
-    <p align="center">
-<img src="https://img.icons8.com/color/30/000000/nodejs.png">
-    </p>
-    <p align="center">
-<img src="https://img.icons8.com/color/30/000000/graphql.png">
-    </p>
-    <p align="center">
-    <img src="https://img.icons8.com/color/30/000000/apollo.png">
-    </p>
-</div> 
-
-
-
-
-​                    
+​                 
 
 <h4 align="center"> #Reactjs #GraphQL #Apollo #MongoDB #Expressjs #Nodejs </h4>
 ### All Links Here :link:
