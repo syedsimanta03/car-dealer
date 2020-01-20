@@ -69,13 +69,12 @@ class UserAddedCars extends React.Component {
     return (
       <Query query={GET_USER_CARS} variables={{ username }}>
         {({ data, loading, error }) => {
-        console.log(data);
         
           if (loading) return <Spinner />;
           if (error) return <div className='text-center'>Error</div>;
           // console.log(data);
           return (
-            <ul>
+            <div>
               {modal && (
                 <EditCarModal
                   handleSubmit={this.handleSubmit}
@@ -84,7 +83,12 @@ class UserAddedCars extends React.Component {
                   handleChange={this.handleChange}
                 />
               )}
-              <h3>Users Cars</h3>
+              <h3 class='text-center text-white text-uppercase aqua-gradient p-3 mb-5'>
+                {username}'s added cars
+                <strong className='badge badge-primary mb-1 ml-2'>
+                  {data.getUserCars.length}
+                </strong>
+              </h3>
               {!data.getUserCars.length && (
                 <p>
                   <strong className='text-center'>
@@ -92,6 +96,7 @@ class UserAddedCars extends React.Component {
                   </strong>
                 </p>
               )}
+              <div className="row">
               {data.getUserCars.map(car => (
                 <CarItem key={car._id} {...car}>
                   <Mutation
@@ -138,7 +143,8 @@ class UserAddedCars extends React.Component {
                   </Mutation>
                 </CarItem>
               ))}
-            </ul>
+            </div>
+            </div>
           );
         }}
       </Query>
