@@ -1,0 +1,205 @@
+@import '~antd/dist/antd.css';
+
+html {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.t-center {
+  text-align: center;
+}
+
+.cardcontainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  margin: 0 10%;
+  padding: 8% 0;
+}
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.signout {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-weight: bold;
+  color: #fa2e39;
+  margin: 10px 0;
+}
+
+.masthead {
+  height: 100vh;
+  min-height: 500px;
+  background-image: url('/img/carsale.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #fff;
+  margin: 10rem 0;
+}
+.bg-text {
+  background-color: #1890ff;
+  opacity: 0.8;
+  color: #fff;
+  clip-path: polygon(6% 0%, 100% 0%, 96% 100%, 0% 100%);
+}
+.bg-cover {
+  height: 20%;
+  min-height: 500px;
+  background-image: url(/img/bg-cover.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #fff;
+  padding: 10% 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span {
+  color: #2c2828d9;
+  background-color: transparent;
+}
+
+.willhide {
+  animation: FadeAnimation 1s ease-in 0.2s forwards;
+}
+
+@keyframes FadeAnimation {
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* MAP */
+.contact-section .form .btn-floating {
+  left: 3px;
+}
+.map-container {
+  height: 200px;
+  position: relative;
+}
+
+.map-container iframe {
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+/* MAP */
+input:focus {
+  color: #333 !important;
+}
+/* fio */
+.form-row {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.row {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: 0;
+  margin-left: 0;
+}
+/* fio */
+/* car image */
+.view-cascade {
+  display: flex;
+  justify-content: center;
+}
+.card-img-top {
+  width: 90%;
+}
+
+.card {
+  min-width: 300px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.card button {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06) !important;
+}
+.card button:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+}
+
+.btn-floating {
+  position: relative;
+  top: -10px;
+  cursor: pointer;
+}
+
+.img-shadow {
+  box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56),
+    0 4px 25px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+.myy {
+  margin: 6rem 0;
+}
+
+.ant-tag-blue {
+  background: #e6f7ff;
+  padding: 5px 10px !important;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-size: 14px;
+}
+.c-img {
+  background: center center / cover no-repeat;
+  width: 100vw;
+  max-height: 500px;
+}
+.rgba-black-gradient {
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.8) 55%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+.img-fix {
+  width: 100%;
+  max-width: 100%;
+  max-height: 632px;
+}
