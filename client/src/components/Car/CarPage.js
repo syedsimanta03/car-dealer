@@ -6,6 +6,7 @@ import LikeCar from './LikeCar';
 import Spinner from './../Spinner';
 import { Icon } from 'antd';
 import Map from '../Map/Map';
+import LazyLoad from 'react-lazyload';
 
 const CarPage = ({ match }) => {
   //  const {_id} = match.params -> getting id from withRouter(match props)
@@ -38,11 +39,13 @@ const CarPage = ({ match }) => {
                   <div className='col-lg-8 col-sm-12'>
                     <div className='view zoom z-depth-1 rounded mb-4'>
                       <a href='#!'>
-                        <img
-                          src={imageUrl}
-                          className='img-fix'
-                          alt='sample image'
-                        />
+                        <LazyLoad height={200} offset={100}>
+                          <img
+                            src={imageUrl}
+                            className='img-fix'
+                            alt='sample image'
+                          />
+                        </LazyLoad>
                         <div className='mask rgba-black-gradient d-md-flex align-items-end'>
                           <div className='text-bottom white-text p-4'>
                             <span className='badge badge-primary'>

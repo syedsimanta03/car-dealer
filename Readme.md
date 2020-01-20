@@ -63,6 +63,10 @@ npm run dev
 - Car short des on card - long on car detail page
 - Car real time like unlike update
 - RICH TEXT EDITOR -> Car Add
+- User added cars to Profile and count*
+- CRUD Operation -> **CREATE READ UPDATE DELETE**
+
+- Load more data BTN
 
 ## Show your support
 

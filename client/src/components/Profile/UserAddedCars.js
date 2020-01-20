@@ -24,7 +24,8 @@ class UserAddedCars extends React.Component {
     username: '',
     mileages: '',
     rating: '',
-    modal: false
+    modal: false,
+    visible: 3
   };
 
   handleChange = event => {
@@ -59,6 +60,12 @@ class UserAddedCars extends React.Component {
     this.setState({ modal: false });
   };
 
+  loadMore = () => {
+    this.setState(prev => {
+      return { visible: prev.visible + 3 };
+    });
+  };
+
   render() {
     // username is coming from Profile.js props
     const { username } = this.props;
@@ -69,7 +76,6 @@ class UserAddedCars extends React.Component {
     return (
       <Query query={GET_USER_CARS} variables={{ username }}>
         {({ data, loading, error }) => {
-        
           if (loading) return <Spinner />;
           if (error) return <div className='text-center'>Error</div>;
           // console.log(data);
@@ -96,54 +102,65 @@ class UserAddedCars extends React.Component {
                   </strong>
                 </p>
               )}
-              <div className="row">
-              {data.getUserCars.map(car => (
-                <CarItem key={car._id} {...car}>
-                  <Mutation
-                    mutation={DELETE_USER_CAR}
-                    variables={{ _id: car._id }}
-                    refetchQueries={() => [
-                      { query: GET_ALL_CARS },
-                      { query: GET_CURRENT_USER }
-                    ]}
-                    update={(cache, { data: { deleteUserCar } }) => {
-                      // Read old cache data query
-                      const { getUserCars } = cache.readQuery({
-                        query: GET_USER_CARS,
-                        variables: { username }
-                      });
-                      // Update/write data query after CRUD according to the below filter
-                      cache.writeQuery({
-                        query: GET_USER_CARS,
-                        variables: { username },
-                        data: {
-                          getUserCars: getUserCars.filter(
-                            car => car._id !== deleteUserCar._id
-                          )
-                        }
-                      });
-                    }}
+              <div className='row'>
+                {data.getUserCars
+                  .slice(0, this.state.visible)
+                  .map((car, index) => (
+                    <CarItem key={car._id} {...car}>
+                      <Mutation
+                        mutation={DELETE_USER_CAR}
+                        variables={{ _id: car._id }}
+                        refetchQueries={() => [
+                          { query: GET_ALL_CARS },
+                          { query: GET_CURRENT_USER }
+                        ]}
+                        update={(cache, { data: { deleteUserCar } }) => {
+                          // Read old cache data query
+                          const { getUserCars } = cache.readQuery({
+                            query: GET_USER_CARS,
+                            variables: { username }
+                          });
+                          // Update/write data query after CRUD according to the below filter
+                          cache.writeQuery({
+                            query: GET_USER_CARS,
+                            variables: { username },
+                            data: {
+                              getUserCars: getUserCars.filter(
+                                car => car._id !== deleteUserCar._id
+                              )
+                            }
+                          });
+                        }}
+                      >
+                        {(deleteUserCar, attrs = {}) => (
+                          <div>
+                            <button
+                              className='button-primary'
+                              onClick={() => this.loadCar(car)}
+                            >
+                              Update
+                            </button>
+                            <p
+                              className='delete-button'
+                              onClick={() => this.handleDelete(deleteUserCar)}
+                            >
+                              {attrs.loading ? 'deleting...' : 'X'}
+                            </p>
+                          </div>
+                        )}
+                      </Mutation>
+                    </CarItem>
+                  ))}
+                {this.state.visible < data.getUserCars.length && (
+                  <button
+                    onClick={this.loadMore}
+                    type='button'
+                    className='btn btn-info mx-auto my-5'
                   >
-                    {(deleteUserCar, attrs = {}) => (
-                      <div>
-                        <button
-                          className='button-primary'
-                          onClick={() => this.loadCar(car)}
-                        >
-                          Update
-                        </button>
-                        <p
-                          className='delete-button'
-                          onClick={() => this.handleDelete(deleteUserCar)}
-                        >
-                          {attrs.loading ? 'deleting...' : 'X'}
-                        </p>
-                      </div>
-                    )}
-                  </Mutation>
-                </CarItem>
-              ))}
-            </div>
+                    Load more
+                  </button>
+                )}
+              </div>
             </div>
           );
         }}

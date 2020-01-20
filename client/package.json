@@ -16,6 +16,7 @@
     "react-avatar": "^3.9.0",
     "react-ckeditor-component": "^1.1.0",
     "react-dom": "^16.12.0",
+    "react-lazyload": "^2.6.5",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.0"
   },

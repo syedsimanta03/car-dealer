@@ -1,20 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Icon, Badge,Tag } from 'antd';
+import LazyLoad from 'react-lazyload';
 
 //props coming from App.js
 const CarItem = ({ _id, imageUrl, name, description, category, likes, rating, price }) => {
   return (
-    <div className='col-lg-4 col-md-12 col-sm-12'>
+    <div className='col-lg-4 col-md-12 col-sm-12 animated fadeIn delay-1s'>
       <div className='card card-cascade narrower mb-5'>
         {/* Card image */}
         <div className='view view-cascade overlay'>
-          <img
-            className='card-img-top img-shadow'
-            src={imageUrl}
-            alt='Card image cap'
-            height='300'
-          />
+          <LazyLoad height={200} offset={100}>
+            <img
+              className='card-img-top img-shadow'
+              src={imageUrl}
+              alt='Card image cap'
+              height='300'
+            />
+          </LazyLoad>
           <a>
             <div className='mask rgba-white-slight' />
           </a>

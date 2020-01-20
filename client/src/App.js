@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Header from './components/Header/Header';
 import Services from './components/Services/Services';
 import Subscribe from './components/Subscribe/Subscribe';
@@ -10,35 +10,56 @@ import CarItem from './components/Car/CarItem';
 import Spinner from './components/Spinner';
 import OurFeature from './components/Ourfeature/OurFeature';
 
-const App = () => {
-  return (
-    <div>
-      <Header />
-      <Services />
-      <div>
-        <h3 className='display-4 text-center text-light myy'>
-          Get Your Dream <strong>Car</strong>
-        </h3>
+class App extends Component {
+  state = {
+    visible: 3
+  };
+  // Load more cards
+  loadMore = () => {
+    this.setState(prev => {
+      return { visible: prev.visible + 3 };
+    });
+  };
 
-        <Query query={GET_ALL_CARS}>
-          {({ data, loading, error }) => {
-            if (loading) return <Spinner />;
-            if (error) return <div>Error</div>;
-            return (
-              <div className='row m-5'>
-                {data.getAllCars.map(car => (
-                  <CarItem key={car._id} {...car} />
-                ))}
-              </div>
-            );
-          }}
-        </Query>
+  render() {
+    return (
+      <div>
+        <Header />
+        <Services />
+        <div>
+          <h3 className='display-4 text-center text-light myy'>
+            Get Your Dream <strong>Car</strong>
+          </h3>
+
+          <Query query={GET_ALL_CARS}>
+            {({ data, loading, error }) => {
+              if (loading) return <Spinner />;
+              if (error) return <div>Error</div>;
+              return (
+                <div className='row m-5'>
+                  {data.getAllCars.slice(0, this.state.visible).map(car => (
+                    <CarItem key={car._id} {...car} />
+                  ))}
+          {this.state.visible < data.getAllCars.length && (
+            <button
+              onClick={this.loadMore}
+              type='button'
+              className='btn btn-info mx-auto mt-5'
+            >
+              Load more
+            </button>
+          )}
+                </div>
+              );
+            }}
+          </Query>
+        </div>
+        <OurFeature />
+        <Subscribe />
+        <Map />
       </div>
-      <OurFeature/>
-      <Subscribe />
-      <Map />
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default App;
