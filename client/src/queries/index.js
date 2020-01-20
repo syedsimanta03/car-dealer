@@ -110,41 +110,43 @@ export const SEARCH_CARS = gql`
 /* Car mutations */
 // Add a car
 export const ADD_CAR = gql`
-  mutation(
-    $name: String!
-    $price: Int!
-    $imageUrl: String!
-    $category: String!
-    $description: String!
-    $features: String!
-    $likes: Int
-    $mileages: String
-    $rating: Int
-  ) {
-    addCar(
-      name: $name
-      price: $price
-      imageUrl: $imageUrl
-      category: $category
-      description: $description
-      features: $features
-      likes: $likes
-      mileages: $mileages
-      rating: $rating
-    ) {
-      name
-      price
-      imageUrl
-      category
-      description
-      features
-      likes
-      username
-      mileages
-      rating
-    }
-  }
-`;
+         mutation(
+           $name: String!
+           $price: Int!
+           $imageUrl: String!
+           $category: String!
+           $description: String!
+           $features: String!
+           $likes: Int
+           $mileages: String
+           $rating: Int
+           $username: String
+         ) {
+           addCar(
+             name: $name
+             price: $price
+             imageUrl: $imageUrl
+             category: $category
+             description: $description
+             features: $features
+             likes: $likes
+             mileages: $mileages
+             rating: $rating
+             username: $username
+           ) {
+             name
+             price
+             imageUrl
+             category
+             description
+             features
+             likes
+             username
+             mileages
+             rating
+           }
+         }
+       `;
 /* User Mutations */
 export const SIGNIN_USER = gql`
   mutation($username: String!, $password: String!) {
@@ -178,6 +180,54 @@ export const UNLIKE_CAR = gql`
     unlikeCar(_id: $_id, username: $username) {
       _id
       likes
+    }
+  }
+`;
+
+// Update specific user's car
+export const UPDATE_USER_CAR = gql`
+  mutation(
+    $_id: ID!
+    $name: String!
+    $price: Int!
+    $imageUrl: String!
+    $category: String!
+    $description: String!
+    $features: String!
+    $mileages: String
+    $rating: Int
+  ) {
+    updateUserCar(
+      _id: $id
+      name: $name
+      price: $price
+      imageUrl: $imageUrl
+      category: $category
+      description: $description
+      features: $features
+      mileages: $mileages
+      rating: $rating
+    ) {
+      _id
+      name
+      price
+      imageUrl
+      category
+      description
+      features
+      likes
+      username
+      mileages
+      rating
+    }
+  }
+`;
+
+// Delete specific user's car
+export const DELETE_USER_CAR = gql`
+  mutation($_id: ID!) {
+    deleteUserCar(_id: $_id) {
+      _id
     }
   }
 `;

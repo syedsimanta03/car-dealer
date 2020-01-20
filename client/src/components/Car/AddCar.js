@@ -129,7 +129,8 @@ class AddCar extends Component {
           description,
           features,
           mileages,
-          rating
+          rating,
+          username
         }}
         update={this.updateCache}
         refetchQueries={() => [
@@ -229,7 +230,7 @@ class AddCar extends Component {
                       <button
                         type='submit'
                         className='btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0'
-                        disabled={loading || this.validateForm()}                       
+                        disabled={loading || this.validateForm()}
                       >
                         Submit my car
                       </button>

@@ -12,7 +12,7 @@ const Profile = ({ session }) => {
     <div>
       <UserInfo session={session} />
       <UserCars session={session} />
-      <UserAddedCars/>
+      <UserAddedCars username={session.getCurrentUser.username} />
     </div>
   );
 };

@@ -61,10 +61,9 @@ exports.resolvers = {
       const userCars = await Car.find({ username }).sort({
         createdDate: 'desc'
       });
-      
+
       return userCars;
     },
-
 
     /*  GET ALL USERS with Ref field  */
     getCurrentUser: async (root, args, { currentUser, User }) => {
@@ -103,11 +102,11 @@ exports.resolvers = {
         category,
         likes,
         mileages,
-        rating
-        },
+        rating,
+        username
+      },
       { Car }
     ) => {
-      
       const newCar = await new Car({
         name,
         price,
@@ -117,7 +116,8 @@ exports.resolvers = {
         category,
         likes,
         mileages,
-        rating
+        rating,
+        username
       }).save();
 
       return newCar;
@@ -126,12 +126,33 @@ exports.resolvers = {
     /* Update specific user Car */
     updateUserCar: async (
       root,
-      { _id, name, price, imageUrl, description, features, category },
+      {
+        _id,
+        name,
+        price,
+        imageUrl,
+        description,
+        features,
+        category,
+        mileages,
+        rating
+      },
       { Car }
     ) => {
       const updatedCar = await Car.findOneAndUpdate(
         { _id },
-        { $set: { name, price, imageUrl, description, features, category } },
+        {
+          $set: {
+            name,
+            price,
+            imageUrl,
+            description,
+            features,
+            category,
+            mileages,
+            rating
+          }
+        },
         { new: true }
       );
       return updatedCar;

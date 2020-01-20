@@ -44,28 +44,30 @@ exports.typeDefs = `
   type Mutation {
 
     addCar(
-    name: String!
-    price: Int!
-    imageUrl: String!
-    category: String!
-    description: String!
-    features: String!
-    likes: Int
-    mileages: String
-    rating: Int
+    name: String!,
+    price: Int!,
+    imageUrl: String!,
+    category: String!,
+    description: String!,
+    features: String!,
+    likes: Int,
+    mileages: String,
+    rating: Int,
+    username: String
     ): Car
 
     deleteUserCar(_id: ID): Car
     
-    updateUserCar(_id: ID!, 
-    name: String!
-    price: Int!
-    imageUrl: String!
-    category: String!
-    description: String!
-    features: String!
-    createdDate: String
-    username: String
+    updateUserCar(
+    _id: ID!,
+    name: String!,
+    price: Int!,
+    imageUrl: String!,
+    category: String!,
+    description: String!,
+    features: String!,
+    mileages: String,
+    rating: Int
     ): Car
 
     likeCar(_id: ID!, username: String!): Car
