@@ -11,7 +11,7 @@ const OurFeature = () => {
             <div className='card z-depth-2'>
               <div className='card-body p-0'>
                 <div className='row mx-0'>
-                  <div className='col-lg-6 mdb-color darken-2 py-5 px-md-5'>
+                  <div className='col-lg-6 mdb-color primary-color py-5 px-md-5'>
                     <h4 className='font-weight-bold text-white ml-3 mb-4 pb-2'>
                       Saves time for sellers
                     </h4>
@@ -48,7 +48,7 @@ const OurFeature = () => {
                       </li>
                     </ul>
                   </div>
-                  <div className='col-lg-6 red accent-3 py-5 px-md-5'>
+                  <div className='col-lg-6 red success-color py-5 px-md-5'>
                     <h4 className='font-weight-bold text-white ml-3 mb-4 pb-2'>
                       Makes money for cars
                     </h4>
