@@ -1,18 +1,21 @@
 import React from 'react';
-//import { Link } from 'react-router-dom';
+import CKEditor from 'react-ckeditor-component';
+import { Link } from 'react-router-dom';
 import { Query, Mutation } from 'react-apollo';
 import {
   GET_USER_CARS,
   DELETE_USER_CAR,
   GET_ALL_CARS,
   GET_CURRENT_USER,
+  UPDATE_USER_CAR
 } from '../../queries';
 import Spinner from '../Spinner';
-import EditCarModal from '../Car/EditCarModal';
 import LazyLoad from 'react-lazyload';
-import { Modal, Icon } from 'antd';
+import { Modal, Icon, Empty, message } from 'antd';
 
 const { confirm } = Modal;
+const key = 'updatable';
+
 class UserAddedCars extends React.Component {
   state = {
     _id: '',
@@ -22,7 +25,6 @@ class UserAddedCars extends React.Component {
     category: '',
     description: '',
     features: '',
-    username: '',
     mileages: '',
     rating: '',
     modal: false,
@@ -46,12 +48,20 @@ class UserAddedCars extends React.Component {
       onCancel() {}
     });
   };
+// Update/Edit carMessage
+ openMessage = () => {
+  message.loading({ content: 'Loading...', key });
+  setTimeout(() => {
+    message.success({ content: 'Thanks For Updating The Car!', key, duration: 2 });
+  }, 1000);
+};
 
   handleSubmit = (event, updateUserCar) => {
     event.preventDefault();
     updateUserCar().then(({ data }) => {
       //console.log(data);
       this.closeModal();
+      this.openMessage();
     });
   };
 
@@ -90,20 +100,26 @@ class UserAddedCars extends React.Component {
           // console.log(data);
           return (
             <div>
-              {modal && (
-                <EditCarModal
-                  handleSubmit={this.handleSubmit}
-                  car={this.state}
-                  closeModal={this.closeModal}
-                  handleChange={this.handleChange}
-                />
-              )}
               <h3 class='text-center text-white text-uppercase aqua-gradient p-3 mb-5'>
                 {username}'s added cars
                 <strong className='badge badge-primary mb-1 ml-2'>
                   {data.getUserCars.length}
                 </strong>
               </h3>
+              {modal ? (
+                <EditCarModal
+                  handleSubmit={this.handleSubmit}
+                  car={this.state}
+                  closeModal={this.closeModal}
+                  handleChange={this.handleChange}
+                />
+              ) : (
+                <Empty
+                  className='text-center mb-5'
+                  description={<span>Nothing To Edit...</span>}
+                />
+              )}
+
               {!data.getUserCars.length && (
                 <p>
                   <strong className='text-center'>
@@ -119,16 +135,18 @@ class UserAddedCars extends React.Component {
                       <div className='row usercar mb-3 d-flex justify-content-between align-items-center'>
                         <div className='col-lg-4 col-md-12 col-sm-12'>
                           <LazyLoad>
-                            <img
-                              className='card-img-top img-shadow'
-                              src={car.imageUrl}
-                              alt='Cardp'
-                              height='300'
-                              width='100'
-                            />
+                            <Link to={`/cars/${car._id}`}>
+                              <img
+                                className='card-img-top img-shadow'
+                                src={car.imageUrl}
+                                alt='Cardp'
+                                height='300'
+                                width='100'
+                              />
+                            </Link>
                           </LazyLoad>
                         </div>
-                        <div className='col-lg-4 col-md-12 col-sm-12'>
+                        <div className='col-lg-4 col-md-12 col-sm-12 mt-4 mt-lg-0'>
                           <p className='d-flex align-items-center'>
                             <Icon
                               className='mr-2'
@@ -209,6 +227,11 @@ class UserAddedCars extends React.Component {
                               >
                                 Edit
                               </button>
+                              <Link to={`/cars/${car._id}`}>
+                                <button className='btn-primary b-fix shadow-sm'>
+                                  View Car
+                                </button>
+                              </Link>
                               <button
                                 className='btn-danger b-fix shadow-sm'
                                 onClick={() => this.handleDelete(deleteUserCar)}
@@ -243,5 +266,130 @@ class UserAddedCars extends React.Component {
 }
 
 
+
+const EditCarModal = ({
+  handleSubmit,
+  handleEditorChange,
+  car,
+  handleChange,
+  closeModal
+}) => (
+  <Mutation
+    mutation={UPDATE_USER_CAR}
+    variables={{
+      _id: car._id,
+      name: car.name,
+      price: car.price,
+      imageUrl: car.imageUrl,
+      category: car.category,
+      description: car.description,
+      features: car.features,
+      mileages: car.mileages,
+      rating: car.rating
+    }}
+  >
+    {updateUserCar => (
+      <React.Fragment>
+        <div className='container my-5'>
+          <div className='card'>
+            <h5 className='card-header info-color white-text text-center py-4'>
+              <strong className='text-center'>EDIT YOUR CAR</strong>
+            </h5>
+            <div className='card-body px-lg-5 pt-0'>
+              <form
+                className='md-form'
+                onSubmit={event => handleSubmit(event, updateUserCar)}
+                style={{ color: '#757575' }}
+              >
+                <input
+                  type='text'
+                  id='input'
+                  className='form-control'
+                  placeholder='Car Name'
+                  name='name'
+                  value={car.name}
+                  onChange={handleChange}
+                />
+                <input
+                  type='number'
+                  id='input'
+                  className='form-control'
+                  placeholder='Car Price'
+                  name='price'
+                  value={car.price}
+                  onChange={handleChange}
+                />
+                <input
+                  type='number'
+                  id='input'
+                  className='form-control'
+                  placeholder='Rate condition out of 5(INT)'
+                  name='rating'
+                  value={car.rating}
+                  onChange={handleChange}
+                />
+                <input
+                  type='text'
+                  id='input'
+                  className='form-control'
+                  placeholder='Image URL'
+                  name='imageUrl'
+                  value={car.imageUrl}
+                  onChange={handleChange}
+                />
+                <div>
+                  <select
+                    className='mdb-select md-form mb-4 initialized'
+                    id='select'
+                    name='category'
+                    value={car.category}
+                    onChange={handleChange}
+                  >
+                    <option value disabled selected>
+                      Choose your category
+                    </option>
+                    <option value='Sedan'>Sedan</option>
+                    <option value='Truck'>Truck</option>
+                    <option value='Sports'>Sports</option>
+                  </select>
+                </div>
+                <textarea
+                  className='form-control md-textarea'
+                  id='textarea'
+                  placeholder='Car Description'
+                  name='description'
+                  value={car.description}
+                  onChange={handleChange}
+                />
+                <input
+                  type='text'
+                  id='input'
+                  className='form-control'
+                  placeholder='Mileages'
+                  name='mileages'
+                  value={car.mileages}
+                  onChange={handleChange}
+                />
+                <CKEditor
+                  name='features'
+                  content={car.features}
+                  events={{ change: handleEditorChange }}
+                />
+                <div className='row mt-5 justify-content-between align-items-center'>
+                  <button type='submit' className='btn-primary b-fix'>
+                    Update
+                  </button>
+                  <button className='btn-danger b-fix' onClick={closeModal}>
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </React.Fragment>
+    )}
+  </Mutation>
+);
 
 export default UserAddedCars;

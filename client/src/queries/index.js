@@ -110,43 +110,43 @@ export const SEARCH_CARS = gql`
 /* Car mutations */
 // Add a car
 export const ADD_CAR = gql`
-         mutation(
-           $name: String!
-           $price: Int!
-           $imageUrl: String!
-           $category: String!
-           $description: String!
-           $features: String!
-           $likes: Int
-           $mileages: String
-           $rating: Int
-           $username: String
-         ) {
-           addCar(
-             name: $name
-             price: $price
-             imageUrl: $imageUrl
-             category: $category
-             description: $description
-             features: $features
-             likes: $likes
-             mileages: $mileages
-             rating: $rating
-             username: $username
-           ) {
-             name
-             price
-             imageUrl
-             category
-             description
-             features
-             likes
-             username
-             mileages
-             rating
-           }
-         }
-       `;
+  mutation(
+    $name: String!
+    $price: Int!
+    $imageUrl: String!
+    $category: String!
+    $description: String!
+    $features: String!
+    $likes: Int
+    $mileages: String
+    $rating: Int
+    $username: String
+  ) {
+    addCar(
+      name: $name
+      price: $price
+      imageUrl: $imageUrl
+      category: $category
+      description: $description
+      features: $features
+      likes: $likes
+      mileages: $mileages
+      rating: $rating
+      username: $username
+    ) {
+      name
+      price
+      imageUrl
+      category
+      description
+      features
+      likes
+      username
+      mileages
+      rating
+    }
+  }
+`;
 /* User Mutations */
 export const SIGNIN_USER = gql`
   mutation($username: String!, $password: String!) {
@@ -198,7 +198,7 @@ export const UPDATE_USER_CAR = gql`
     $rating: Int
   ) {
     updateUserCar(
-      _id: $id
+      _id: $_id
       name: $name
       price: $price
       imageUrl: $imageUrl
