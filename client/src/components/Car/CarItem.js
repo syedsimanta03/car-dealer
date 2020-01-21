@@ -14,7 +14,7 @@ const CarItem = ({ _id, imageUrl, name, description, category, likes, rating, pr
             <img
               className='card-img-top img-shadow'
               src={imageUrl}
-              alt='Card image cap'
+              alt='Cardp'
               height='300'
             />
           </LazyLoad>

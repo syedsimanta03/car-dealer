@@ -206,8 +206,6 @@ class AddCar extends Component {
                       <textarea
                         className='form-control md-textarea'
                         id='textarea'
-                        placeholder
-                        defaultValue={''}
                         placeholder='Car Description'
                         name='description'
                         value={description}

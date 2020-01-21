@@ -1,17 +1,18 @@
 import React from 'react';
 //import { Link } from 'react-router-dom';
-
 import { Query, Mutation } from 'react-apollo';
 import {
   GET_USER_CARS,
   DELETE_USER_CAR,
   GET_ALL_CARS,
   GET_CURRENT_USER,
-  UPDATE_USER_CAR
 } from '../../queries';
 import Spinner from '../Spinner';
-import CarItem from '../Car/CarItem';
+import EditCarModal from '../Car/EditCarModal';
+import LazyLoad from 'react-lazyload';
+import { Modal, Icon } from 'antd';
 
+const { confirm } = Modal;
 class UserAddedCars extends React.Component {
   state = {
     _id: '',
@@ -34,14 +35,16 @@ class UserAddedCars extends React.Component {
   };
   // Delete user's car
   handleDelete = deleteUserCar => {
-    const confirmDelete = window.confirm(
-      'Are you sure you want to delete Car?'
-    );
-    if (confirmDelete) {
-      deleteUserCar().then(({ data }) => {
-        // console.log(data);
-      });
-    }
+    confirm({
+      title: 'Do you want to delete this item?',
+      content: 'Click on OK to delete',
+      onOk() {
+        deleteUserCar().then(({ data }) => {
+          // console.log(data);
+        });
+      },
+      onCancel() {}
+    });
   };
 
   handleSubmit = (event, updateUserCar) => {
@@ -52,12 +55,14 @@ class UserAddedCars extends React.Component {
     });
   };
 
-  loadCar = car => {
-    this.setState({ ...car, modal: true });
+  // CKEditor
+  handleEditorChange = event => {
+    const newContent = event.editor.getData();
+    this.setState({ features: newContent });
   };
 
-  closeModal = () => {
-    this.setState({ modal: false });
+  loadCar = car => {
+    this.setState({ ...car, modal: true });
   };
 
   loadMore = () => {
@@ -65,7 +70,9 @@ class UserAddedCars extends React.Component {
       return { visible: prev.visible + 3 };
     });
   };
-
+  closeModal = () => {
+    this.setState({ modal: false });
+  };
   render() {
     // username is coming from Profile.js props
     const { username } = this.props;
@@ -76,6 +83,8 @@ class UserAddedCars extends React.Component {
     return (
       <Query query={GET_USER_CARS} variables={{ username }}>
         {({ data, loading, error }) => {
+          console.log(data);
+
           if (loading) return <Spinner />;
           if (error) return <div className='text-center'>Error</div>;
           // console.log(data);
@@ -84,7 +93,7 @@ class UserAddedCars extends React.Component {
               {modal && (
                 <EditCarModal
                   handleSubmit={this.handleSubmit}
-                  recipe={this.state}
+                  car={this.state}
                   closeModal={this.closeModal}
                   handleChange={this.handleChange}
                 />
@@ -102,56 +111,120 @@ class UserAddedCars extends React.Component {
                   </strong>
                 </p>
               )}
-              <div className='row'>
-                {data.getUserCars
-                  .slice(0, this.state.visible)
-                  .map((car, index) => (
-                    <CarItem key={car._id} {...car}>
-                      <Mutation
-                        mutation={DELETE_USER_CAR}
-                        variables={{ _id: car._id }}
-                        refetchQueries={() => [
-                          { query: GET_ALL_CARS },
-                          { query: GET_CURRENT_USER }
-                        ]}
-                        update={(cache, { data: { deleteUserCar } }) => {
-                          // Read old cache data query
-                          const { getUserCars } = cache.readQuery({
-                            query: GET_USER_CARS,
-                            variables: { username }
-                          });
-                          // Update/write data query after CRUD according to the below filter
-                          cache.writeQuery({
-                            query: GET_USER_CARS,
-                            variables: { username },
-                            data: {
-                              getUserCars: getUserCars.filter(
-                                car => car._id !== deleteUserCar._id
-                              )
-                            }
-                          });
-                        }}
-                      >
-                        {(deleteUserCar, attrs = {}) => (
-                          <div>
-                            <button
-                              className='button-primary'
-                              onClick={() => this.loadCar(car)}
-                            >
-                              Update
-                            </button>
-                            <p
-                              className='delete-button'
-                              onClick={() => this.handleDelete(deleteUserCar)}
-                            >
-                              {attrs.loading ? 'deleting...' : 'X'}
-                            </p>
-                          </div>
-                        )}
-                      </Mutation>
-                    </CarItem>
-                  ))}
-                {this.state.visible < data.getUserCars.length && (
+              {data.getUserCars
+                .slice(0, this.state.visible)
+                .map((car, index) => (
+                  <React.Fragment>
+                    <div key={car._id}>
+                      <div className='row usercar mb-3 d-flex justify-content-between align-items-center'>
+                        <div className='col-lg-4 col-md-12 col-sm-12'>
+                          <LazyLoad>
+                            <img
+                              className='card-img-top img-shadow'
+                              src={car.imageUrl}
+                              alt='Cardp'
+                              height='300'
+                              width='100'
+                            />
+                          </LazyLoad>
+                        </div>
+                        <div className='col-lg-4 col-md-12 col-sm-12'>
+                          <p className='d-flex align-items-center'>
+                            <Icon
+                              className='mr-2'
+                              type='right-circle'
+                              theme='twoTone'
+                              twoToneColor='#52c41a'
+                            />
+                            Car Name: {car.name}
+                          </p>
+                          <p className='d-flex align-items-center'>
+                            <Icon
+                              className='mr-2'
+                              type='right-circle'
+                              theme='twoTone'
+                              twoToneColor='#52c41a'
+                            />
+                            Car Price: ${car.price}
+                          </p>
+                          <p className='d-flex align-items-center'>
+                            <Icon
+                              className='mr-2'
+                              type='right-circle'
+                              theme='twoTone'
+                              twoToneColor='#52c41a'
+                            />
+                            Car Category: {car.category}
+                          </p>
+                          <p className='d-flex align-items-center'>
+                            <Icon
+                              className='mr-2'
+                              type='right-circle'
+                              theme='twoTone'
+                              twoToneColor='#52c41a'
+                            />
+                            Car Likes: {car.likes}
+                          </p>
+                          <p className='d-flex align-items-center'>
+                            <Icon
+                              className='mr-2'
+                              type='right-circle'
+                              theme='twoTone'
+                              twoToneColor='#52c41a'
+                            />
+                            Car Rating: {car.rating}
+                          </p>
+                        </div>
+
+                        <Mutation
+                          mutation={DELETE_USER_CAR}
+                          variables={{ _id: car._id }}
+                          refetchQueries={() => [
+                            { query: GET_ALL_CARS },
+                            { query: GET_CURRENT_USER }
+                          ]}
+                          update={(cache, { data: { deleteUserCar } }) => {
+                            // Read old cache data query
+                            const { getUserCars } = cache.readQuery({
+                              query: GET_USER_CARS,
+                              variables: { username }
+                            });
+                            // Update/write data query after CRUD according to the below filter
+                            cache.writeQuery({
+                              query: GET_USER_CARS,
+                              variables: { username },
+                              data: {
+                                getUserCars: getUserCars.filter(
+                                  car => car._id !== deleteUserCar._id
+                                )
+                              }
+                            });
+                          }}
+                        >
+                          {(deleteUserCar, attrs = {}) => (
+                            <div className='col-lg-4 col-md-12 col-sm-12 d-flex justify-content-between align-items-center'>
+                              <button
+                                className='btn-info b-fix shadow-sm'
+                                onClick={() => this.loadCar(car)}
+                              >
+                                Edit
+                              </button>
+                              <button
+                                className='btn-danger b-fix shadow-sm'
+                                onClick={() => this.handleDelete(deleteUserCar)}
+                              >
+                                {attrs.loading ? 'deleting...' : 'Delete'}
+                              </button>
+                            </div>
+                          )}
+                        </Mutation>
+                      </div>
+                    </div>
+                  </React.Fragment>
+                ))}
+
+              {this.state.visible < data.getUserCars.length && (
+                <div className='row mx-auto'>
                   <button
                     onClick={this.loadMore}
                     type='button'
@@ -159,8 +232,8 @@ class UserAddedCars extends React.Component {
                   >
                     Load more
                   </button>
-                )}
-              </div>
+                </div>
+              )}
             </div>
           );
         }}
@@ -169,120 +242,6 @@ class UserAddedCars extends React.Component {
   }
 }
 
-const EditCarModal = ({ handleSubmit, car, handleChange, closeModal }) => (
-  <Mutation
-    mutation={UPDATE_USER_CAR}
-    variables={{
-      _id: car._id,
-      name: car.name,
-      imageUrl: car.imageUrl,
-      category: car.category,
-      description: car.description
-    }}
-  >
-    {updateUserCar => (
-      <React.Fragment>
-        <div className='container my-5'>
-          <div className='card'>
-            <h5 className='card-header info-color white-text text-center py-4'>
-              <strong className='text-center'>EDIT YOUR CAR</strong>
-            </h5>
-            <div className='card-body px-lg-5 pt-0'>
-              <form
-                className='md-form'
-                onSubmit={event => handleSubmit(event, updateUserCar)}
-                style={{ color: '#757575' }}
-              >
-                <input
-                  type='text'
-                  id='input'
-                  className='form-control'
-                  placeholder='Car Name'
-                  name='name'
-                  value={car.name}
-                  onChange={handleChange}
-                />
-                <input
-                  type='number'
-                  id='input'
-                  className='form-control'
-                  placeholder='Car Price'
-                  name='price'
-                  value={car.price}
-                  onChange={handleChange}
-                />
-                <input
-                  type='number'
-                  id='input'
-                  className='form-control'
-                  placeholder='Rate condition out of 5(INT)'
-                  name='rating'
-                  value={car.rating}
-                  onChange={handleChange}
-                />
-                <input
-                  type='text'
-                  id='input'
-                  className='form-control'
-                  placeholder='Image URL'
-                  name='imageUrl'
-                  value={car.imageUrl}
-                  onChange={handleChange}
-                />
-                <div>
-                  <select
-                    className='mdb-select md-form mb-4 initialized'
-                    id='select'
-                    name='category'
-                    value={car.category}
-                    onChange={handleChange}
-                  >
-                    <option value disabled selected>
-                      Choose your category
-                    </option>
-                    <option value='Sedan'>Sedan</option>
-                    <option value='Truck'>Truck</option>
-                    <option value='Sports'>Sports</option>
-                  </select>
-                </div>
-                <textarea
-                  className='form-control md-textarea'
-                  id='textarea'
-                  placeholder
-                  defaultValue={''}
-                  placeholder='Car Description'
-                  name='description'
-                  value={car.description}
-                  onChange={handleChange}
-                />
-                <input
-                  type='text'
-                  id='input'
-                  className='form-control'
-                  placeholder='Mileages'
-                  name='mileages'
-                  value={car.mileages}
-                  onChange={handleChange}
-                />
-                <textarea
-                  name='features'
-                  value={car.features}
-                  onChange={handleChange}
-                />
-                <button
-                  type='submit'
-                  className='btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0'
-                  onClick={closeModal}
-                >
-                  SAVE
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </React.Fragment>
-    )}
-  </Mutation>
-);
+
 
 export default UserAddedCars;

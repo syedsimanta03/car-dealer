@@ -1,4 +1,4 @@
-import React, { Fragment, Profiler } from 'react';
+import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import {
   BrowserRouter as Router,
@@ -25,8 +25,8 @@ import Search from './components/Search/Search';
 
 const client = new ApolloClient({
   // Pull data from the below uri
-  uri: 'http://localhost:4444/graphql',
-  //uri: 'https://automotive-app.herokuapp.com/graphql',
+  //uri: 'http://localhost:4444/graphql',
+uri: 'https://automotive-app.herokuapp.com/graphql',
   // Send localstorage token to DB
   fetchOptions: {
     credentials: 'include'

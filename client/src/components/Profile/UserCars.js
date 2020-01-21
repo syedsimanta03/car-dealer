@@ -1,6 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
-import { Icon, Badge, Tag } from 'antd';
 import CarItem from '../Car/CarItem';
 
 // props from userInfo.js

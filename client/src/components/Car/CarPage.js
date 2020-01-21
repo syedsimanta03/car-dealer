@@ -14,6 +14,8 @@ const CarPage = ({ match }) => {
   return (
     <Query query={GET_CAR} variables={{ _id }}>
       {({ data, loading, error }) => {
+     // console.log(data);
+      
         if (loading) return <Spinner />;
         if (error) return <div>Error</div>;
         const {
@@ -128,6 +130,11 @@ const CarPage = ({ match }) => {
                       <p>${price + 300}</p>
                     </div>
                     <div className='d-flex justify-content-center align-items-center mt-3'>
+                      <Icon type='car' size='large' />
+                      &nbsp;Car Owner:{' '}
+                      {username.charAt(0).toUpperCase() + username.slice(1)}
+                    </div>
+                    <div className='d-flex justify-content-center align-items-center mt-1'>
                       <Icon type='phone' size='large' />
                       &nbsp;Questions? (222) 524-1300
                     </div>
@@ -146,7 +153,7 @@ const CarPage = ({ match }) => {
                             <div className='row mx-0'>
                               <div className='col-md-8 grey lighten-4 rounded-left pt-4'>
                                 <h5 className='font-weight-bold'>Car Check</h5>
-                                <p className='font-weight-light text-muted mb-4'>
+                                <p className='font-weight-light text-muted mb-1'>
                                   Lorem ipsum dolor sit amet consectetur
                                   adipisicing elit. Quibusdam vitae, fuga
                                   similique quos aperiam tenetur quo ut rerum
@@ -169,7 +176,7 @@ const CarPage = ({ match }) => {
                             <div className='row mx-0'>
                               <div className='col-md-8 grey lighten-4 rounded-left pt-4'>
                                 <h5 className='font-weight-bold'>Drive Test</h5>
-                                <p className='font-weight-light text-muted mb-4'>
+                                <p className='font-weight-light text-muted mb-0'>
                                   Lorem ipsum dolor sit amet consectetur
                                   adipisicing elit. Quibusdam vitae, fuga
                                   similique quos aperiam tenetur quo ut rerum
