@@ -7,7 +7,7 @@
 <a  href="https://automotive-app.herokuapp.com/">Visit Website</a>
 </p
 
-> **       Note:** The **AutoCar** is kind of Automotive Car Buy Sell e-Commerce Business App Solution
+> **Description:** The **Auto Car** is kind of Automotive Car Buy Sell e-Commerce Business App Solution
 
 ​                 
 
@@ -65,8 +65,8 @@ npm run dev
 - RICH TEXT EDITOR -> Car Add
 - User added cars to Profile and count*
 - CRUD Operation -> **CREATE READ UPDATE DELETE**
-
 - Load more data BTN
+- Custom 404 page 🤦‍♀️
 
 ## Show your support
 

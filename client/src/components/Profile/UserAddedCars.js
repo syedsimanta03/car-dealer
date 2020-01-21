@@ -112,6 +112,7 @@ class UserAddedCars extends React.Component {
                   car={this.state}
                   closeModal={this.closeModal}
                   handleChange={this.handleChange}
+                  id='edit'
                 />
               ) : (
                 <Empty
@@ -136,13 +137,15 @@ class UserAddedCars extends React.Component {
                         <div className='col-lg-4 col-md-12 col-sm-12'>
                           <LazyLoad>
                             <Link to={`/cars/${car._id}`}>
-                              <img
-                                className='card-img-top img-shadow'
-                                src={car.imageUrl}
-                                alt='Cardp'
-                                height='300'
-                                width='100'
-                              />
+                              <div className='view view-cascade'>
+                                <img
+                                  className='card-img-top img-shadow'
+                                  src={car.imageUrl}
+                                  alt='Cardp'
+                                  height='300'
+                                  width='100'
+                                />
+                              </div>
                             </Link>
                           </LazyLoad>
                         </div>
@@ -222,20 +225,21 @@ class UserAddedCars extends React.Component {
                           {(deleteUserCar, attrs = {}) => (
                             <div className='col-lg-4 col-md-12 col-sm-12 d-flex justify-content-between align-items-center'>
                               <button
-                                className='btn-info b-fix shadow-sm'
+                                className='btn btn-info btn-rounded'
                                 onClick={() => this.loadCar(car)}
                               >
-                                Edit
+                                <i class='fas fa-magic mr-1'></i>Edit
                               </button>
                               <Link to={`/cars/${car._id}`}>
-                                <button className='btn-primary b-fix shadow-sm'>
-                                  View Car
+                                <button className='btn btn-primary btn-rounded'>
+                                  <i class='fas fa-eye mr-1'></i>View
                                 </button>
                               </Link>
                               <button
-                                className='btn-danger b-fix shadow-sm'
+                                className='btn btn-danger btn-rounded'
                                 onClick={() => this.handleDelete(deleteUserCar)}
                               >
+                                <i class='fas fa-trash-alt mr-1'></i>
                                 {attrs.loading ? 'deleting...' : 'Delete'}
                               </button>
                             </div>

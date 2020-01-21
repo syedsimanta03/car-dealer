@@ -31,7 +31,7 @@ const CarItem = ({ _id, imageUrl, name, description, category, likes, rating, pr
           />
         </a>
         <li className='nav-item list-unstyled'>
-          <p className='nav-link' data-toggle='tab' href='#panel87' role='tab'>
+          <p className='nav-link text-success' data-toggle='tab' href='#panel87' role='tab'>
             <i className='fas fa-star mr-1' aria-hidden='true'></i> {rating}
           </p>
         </li>

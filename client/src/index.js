@@ -22,11 +22,12 @@ import Profile from './components/Profile/Profile';
 import CarPage from './components/Car/CarPage';
 import AddCar from './components/Car/AddCar';
 import Search from './components/Search/Search';
+import NotFound from './components/NotFound';
 
 const client = new ApolloClient({
   // Pull data from the below uri
- // uri: 'http://localhost:4444/graphql',
-  uri: 'https://automotive-app.herokuapp.com/graphql',
+uri: 'http://localhost:4444/graphql',
+//uri: 'https://automotive-app.herokuapp.com/graphql',
   // Send localstorage token to DB
   fetchOptions: {
     credentials: 'include'
@@ -63,7 +64,7 @@ const Root = ({ refetch, session }) => (
         <Route path='/car/add' render={() => <AddCar session={session} />} />
         <Route path='/profile' render={() => <Profile session={session} />} />
         <Route path='/cars/:_id' component={CarPage} />
-        <Redirect to='/' />
+        <Route path='*' component={NotFound} />
       </Switch>
       <Footer />
     </Fragment>

@@ -14,7 +14,7 @@ const NavbarAuth = () => (
   <nav className='menuBar'>
     <div className='logo'>
       {/* eslint-disable-next-line */}
-      <a href='/'>Autcars</a>
+      <a href='/'>Autocar</a>
     </div>
     <div className='menuCon'>
       <div>

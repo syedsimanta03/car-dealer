@@ -212,12 +212,17 @@ input:focus {
     color: #fff;
 }
 
-.b-fix {
-    outline: none;
-    border: none;
-    padding: 10px 20px;
+.btn-rounded {
+    border-radius: 10em;
 }
+
 .usercar {
     background-color: #f9f9f9;
     padding: 2%;
+}
+
+.ant-message-custom-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

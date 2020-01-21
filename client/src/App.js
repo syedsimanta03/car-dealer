@@ -27,9 +27,9 @@ class App extends Component {
         <Header />
         <Services />
         <div>
-          <h3 className='display-4 text-center text-light myy'>
-            Get Your Dream <strong>Car</strong>
-          </h3>
+          <h2 className='text-center text-gray myy'>
+            Get Your Dream Car
+          </h2>
 
           <Query query={GET_ALL_CARS}>
             {({ data, loading, error }) => {
