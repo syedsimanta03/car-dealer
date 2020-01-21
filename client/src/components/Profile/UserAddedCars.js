@@ -48,13 +48,17 @@ class UserAddedCars extends React.Component {
       onCancel() {}
     });
   };
-// Update/Edit carMessage
- openMessage = () => {
-  message.loading({ content: 'Loading...', key });
-  setTimeout(() => {
-    message.success({ content: 'Thanks For Updating The Car!', key, duration: 2 });
-  }, 1000);
-};
+  // Update/Edit carMessage
+  openMessage = () => {
+    message.loading({ content: 'Loading...', key });
+    setTimeout(() => {
+      message.success({
+        content: 'Thanks For Updating The Car!',
+        key,
+        duration: 2
+      });
+    }, 1000);
+  };
 
   handleSubmit = (event, updateUserCar) => {
     event.preventDefault();
@@ -268,8 +272,6 @@ class UserAddedCars extends React.Component {
     );
   }
 }
-
-
 
 const EditCarModal = ({
   handleSubmit,

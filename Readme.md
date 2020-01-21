@@ -7,7 +7,7 @@
 <a  href="https://automotive-app.herokuapp.com/">Visit Website</a>
 </p
 
-> **Description:** The **Auto Car** is kind of Automotive Car Buy Sell e-Commerce Business App Solution
+> **Description:** The **Auto Car** is a Automotive Car Buy Sell  Business App Solution
 
 ​                 
 
@@ -50,14 +50,14 @@ npm run dev
 
 - Toast Notification (2 variations)
 - Icon Animation
-- Loader
+- Loader/Spinner
 - Google Map
 - Forms with Validation
 - AUTH profile 🔐
-- User Favorite Carson Profile
+- User Favourite Cars on Profile
 - User Fav Items 
 - User Likes & Rating
-- Userz Liked 99 limit hover all likes show
+- User's Liked 99 limit hover all likes show
 - User Avatar Dynamic Using Name's First Letter
 - DYNAMIC CAR PAGE 🚗
 - Car short des on card - long on car detail page
@@ -67,6 +67,7 @@ npm run dev
 - CRUD Operation -> **CREATE READ UPDATE DELETE**
 - Load more data BTN
 - Custom 404 page 🤦‍♀️
+- AND MORE+++
 
 ## Show your support
 
