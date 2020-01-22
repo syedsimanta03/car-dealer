@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JavaScript-Dessign-Pattern</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="description" content="Description" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+
+    <link rel="stylesheet" href="Night.css" />
+
+    
+
+    <style>
+      html,
+      body {
+        font-size: 1.1rem;
+        scroll-behavior: smooth;
+      }
+
+      .btngroup {
+        font-size: 0;
+        line-height: 1;
+        white-space: nowrap;
+        display: inline;
+      }
+      .btngroup--btn {
+        font-size: 0.6rem;
+        letter-spacing: 0.1em;
+        text-decoration: none;
+        text-transform: uppercase;
+        background-color: #ffffff29;
+        border: 1px solid #e4e4e4;
+        color: #bebebe;
+        border-left-width: 0;
+        display: inline-block;
+        padding: 0.5em 1.25em;
+        outline: 0;
+      }
+      .btngroup--btn:first-child {
+        border-left-width: 2px;
+        border-radius: 2em 0 0 2em;
+      }
+      .btngroup--btn:last-child {
+        border-radius: 0 2em 2em 0;
+      }
+      .btngroup--btn:link {
+        color: #bdc3c7;
+      }
+      .btngroup--btn:visted {
+        color: #bdc3c7;
+      }
+      .btngroup--btn:hover {
+        background: #34495e;
+        color: #fff;
+      }
+      .btngroup--btn:active {
+        background: #fff;
+        color: #34495e;
+      }
+
+      .blur {
+        filter: blur(50px);
+        -webkit-filter: blur(50px);
+        -moz-filter: blur(50px);
+        -o-filter: blur(50px);
+        -ms-filter: blur(50px);
+      }
+      .hide {
+        display: none;
+      }
+	  
+	  .title {
+		color: #3791bb !important;
+	  }
+	  
+	  .alert {
+		margin-top: 1rem;
+		color: #939596 !important;
+		background-color: #0d2833 !important;
+		border-color: #0b1d25 !important;
+		box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+	  }
+
+    </style>
+  </head>
+  <body id="blur">
+    <nav>
+      <span class="btngroup">
+        <button
+          class="btngroup--btn"
+          onclick="changeCSS('Day.css', 0); blurMe();"
+        >
+          Light
+        </button>
+        <button 
+          class="btngroup--btn"
+          onclick="changeCSS('Night.css', 0); blurMe();"
+        >
+          Dark
+        </button>
+      </span>
+    </nav>
+    <div id="app"></div>
+    <script>
+      window.$docsify = {
+        name: '🚀Syed Simanta',
+        loadNavbar: true,
+
+        // docsify-copy-code (defaults)
+        copyCode: {
+          buttonText: 'Copy to clipboard',
+          errorText: 'Error',
+          successText: 'Copied'
+        },
+		'flexible-alerts': {
+		style: 'flat'
+		},
+    tabs: {
+    persist    : true,      // default
+    sync       : true,      // default
+    theme      : 'material', // default
+    tabComments: true,      // default
+    tabHeadings: true       // default
+  }
+
+      };
+    </script>
+    <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+    <!-- Latest v2.x.x -->
+    <script src="https://unpkg.com/docsify-copy-code@2"></script>
+		<script src="https://unpkg.com/docsify-plugin-flexible-alerts"></script>
+<script src="https://cdn.jsdelivr.net/npm/docsify-tabs@1"></script>
+
+
+    <script>
+      function changeCSS(cssFile, cssLinkIndex) {
+        var oldlink = document.getElementsByTagName('link').item(cssLinkIndex);
+
+        var newlink = document.createElement('link');
+        newlink.setAttribute('rel', 'stylesheet');
+        newlink.setAttribute('type', 'text/css');
+        newlink.setAttribute('href', cssFile);
+        newlink.setAttribute('media', 'none');
+        newlink.setAttribute('onload', "if(media!='all')media='all'");
+
+        document
+          .getElementsByTagName('head')
+          .item(0)
+          .replaceChild(newlink, oldlink);
+      }
+
+      // PWA Register
+      if (typeof navigator.serviceWorker !== 'undefined') {
+        navigator.serviceWorker.register('sw.js');
+      }
+
+      function blurMe() {
+        var element = document.getElementById('blur');
+        element.classList.add('blur');
+        setTimeout(function() {
+          element.classList.remove('blur');
+        }, 1000);
+      }
+
+
+    </script>
+
+
+
+
+  </body>
+</html>
