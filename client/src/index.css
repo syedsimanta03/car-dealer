@@ -226,3 +226,16 @@ input:focus {
     justify-content: center;
     align-items: center;
 }
+
+.Checkout.is-desktop .ModalContainer {
+     width: 0 !important;
+}
+
+.Checkout.is-desktop .Modal {
+    width: 30vw !important;
+    margin: 0 auto !important;
+}
+
+.Checkout.is-desktop .Addresses-object {
+    width: 30vw !important;
+}

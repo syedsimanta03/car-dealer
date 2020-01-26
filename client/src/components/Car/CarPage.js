@@ -7,6 +7,7 @@ import Spinner from './../Spinner';
 import { Icon } from 'antd';
 import Map from '../Map/Map';
 import LazyLoad from 'react-lazyload';
+import Checkout from '../Stripe/Checkout.js';
 
 const CarPage = ({ match }) => {
   //  const {_id} = match.params -> getting id from withRouter(match props)
@@ -128,6 +129,16 @@ const CarPage = ({ match }) => {
                     <div className='d-flex justify-content-between align-items-center'>
                       <p>Total Payment**</p>
                       <p>${price + 300}</p>
+                    </div>
+                    <div className='d-flex justify-content-center align-items-center mt-3'>
+                      <Checkout
+                        amount={price + 300}
+                        description={name}
+                        image='https://img.icons8.com/bubbles/100/000000/car.png'
+                        locale='auto'
+                        name='www.autocar.com'
+                        label='Buy This Car'
+                      />
                     </div>
                     <div className='d-flex justify-content-center align-items-center mt-3'>
                       <Icon type='car' size='large' />
