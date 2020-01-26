@@ -14,10 +14,11 @@
 <h4 align="center"> #Reactjs #GraphQL #Apollo #MongoDB #Expressjs #Nodejs </h4>
 ### All Links Here :link:
 
-| LIVE URL | https://automotive-app.herokuapp.com/ |
-| :------: | :-----------------------------------: |
-|  *User*  |              *Password*               |
-|   sam    |               1234test                |
+|  LIVE URL  |      https://automotive-app.herokuapp.com/      |
+| :--------: | :---------------------------------------------: |
+|   *User*   |                       sam                       |
+| *Password* |                    1234test                     |
+| Playground | https://automotive-app.herokuapp.com/playground |
 
 > Install:saxophone: root & client folder
 
