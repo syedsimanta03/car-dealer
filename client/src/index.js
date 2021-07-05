@@ -26,7 +26,7 @@ import NotFound from './components/NotFound';
 const client = new ApolloClient({
   // Pull data from the below uri
 //uri: 'http://localhost:4444/graphql',
-uri: 'https://automotive-app.herokuapp.com/graphql',
+uri: 'https://automotive-app.herokuapp.com/playground',
   // Send localstorage token to DB
   fetchOptions: {
     credentials: 'include'
