@@ -46,7 +46,7 @@ const CarPage = ({ match }) => {
                           <img
                             src={imageUrl}
                             className='img-fix'
-                            alt='sample image'
+                            alt='sample'
                           />
                         </LazyLoad>
                         <div className='mask rgba-black-gradient d-md-flex align-items-end'>
@@ -143,7 +143,7 @@ const CarPage = ({ match }) => {
                     <div className='d-flex justify-content-center align-items-center mt-3'>
                       <Icon type='car' size='large' />
                       &nbsp;Car Owner:{' '}
-                      {username.charAt(0).toUpperCase() + username.slice(1)}
+                      {username?.charAt(0).toUpperCase() + username.slice(1)}
                     </div>
                     <div className='d-flex justify-content-center align-items-center mt-1'>
                       <Icon type='phone' size='large' />
