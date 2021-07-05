@@ -11,9 +11,7 @@
     "server": "nodemon server.js",
     "client": "cd client && npm start",
     "dev": "concurrently --names \"server,client\" \"npm run server --silent\" \"npm run client --silent\"",
-    "build": "cd client && npm run build",
-    "install-client": "cd client && npm install",
-    "heroku-postbuild": "npm run install-client && npm run build"
+    "heroku-postbuild": "npm install -prefix client && npm run build -prefix client"
   },
   "author": "Sam",
   "license": "ISC",
