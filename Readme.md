@@ -18,7 +18,6 @@
 | :--------: | :---------------------------------------------: |
 |   *User*   |                       sam                       |
 | *Password* |                    1234test                     |
-| Playground | https://automotive-app.herokuapp.com/playground |
 
 > Install:saxophone: root & client folder
 
