@@ -53,7 +53,7 @@ body {
 .masthead {
   height: 100vh;
   min-height: 500px;
-  background-image: url('/img/carsale.svg');
+  background-image: url('./img/carsale.svg');
   background-size: cover;
   background-repeat: no-repeat;
   color: #fff;
@@ -68,7 +68,7 @@ body {
 .bg-cover {
   height: 20%;
   min-height: 500px;
-  background-image: url(/img/bg-cover.jpg);
+  background-image: url(./img/bg-cover.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   color: #fff;
