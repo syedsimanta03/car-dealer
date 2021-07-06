@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
-require('dotenv').config({ path: 'variables.env' });
 const jwt = require('jsonwebtoken');
 
 // Import models
