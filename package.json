@@ -21,7 +21,6 @@
     "body-parser": "^1.19.0",
     "concurrently": "^6.2.0",
     "cors": "^2.8.5",
-    "dotenv-webpack": "^7.0.3",
     "express": "^4.17.1",
     "graphql": "^15.5.1",
     "graphql-playground-middleware-express": "^1.7.22",
