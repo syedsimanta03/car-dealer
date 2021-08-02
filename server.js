@@ -73,6 +73,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:😢'));
 //app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
 app.get('/playground', expressPlayground({ endpoint: '/graphql' }))
 
+
 // Connect schema to GraphQL
 app.use(
   '/graphql',
