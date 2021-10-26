@@ -4,7 +4,8 @@
   "description": "React-Apollo-GraphQL",
   "main": "server.js",
   "engines": {
-    "node": "^10"
+   "node": "10.17.0",
+   "npm": "6.11.3"
   },
   "scripts": {
     "start": "node server.js",
