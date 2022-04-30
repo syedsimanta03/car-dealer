@@ -28,7 +28,7 @@ const schema = makeExecutableSchema({
 const app = express();
 
 
-app.use(cors(corsOptions)); */
+app.use(cors(corsOptions));
 app.use(cors('*'));
 
 // Set up JWT authentication middleware for Browser Signin
