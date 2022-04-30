@@ -1,10 +1,9 @@
 import React from 'react';
 import { ApolloConsumer } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
-import Notiflix from 'notiflix-react';
+import { notification, Icon } from 'antd'
 
-// Init the module you want to use. e.g. Notify Module
-Notiflix.Notify.Init({});
+
 
 const handleSignout = (client, history) => {
   // clear local storage token
@@ -14,7 +13,11 @@ const handleSignout = (client, history) => {
   // Redirect to Home after Signout
   history.push('/');
   // Show notification
-  Notiflix.Notify.Success('Logged Out');
+  notification.open({
+    message: 'Logged Out From The App',
+    description: 'See you soon!',
+    icon: <Icon type='check-circle' theme='twoTone' twoToneColor='#52c41a' />,
+  })
 };
 
 const Signout = ({ history }) => (
